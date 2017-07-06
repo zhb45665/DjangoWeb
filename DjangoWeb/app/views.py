@@ -1,11 +1,12 @@
 """
 Definition of views.
 """
-
+#-*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime
+from app.models import BlogPost
 
 def home(request):
     """Renders the home page."""
@@ -42,5 +43,29 @@ def about(request):
             'title':'About',
             'message':'Your application description page.',
             'year':datetime.now().year,
+        }
+    )
+
+def demo(request):
+    """Renders the demo page."""
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/demo.html',
+        {
+            'title':'Demo',
+            'message':'this is Demo page.',
+            'year':datetime.now().year,
+        }
+    )
+def user(request):
+    """Renders the demo page."""
+    assert isinstance(request, HttpRequest)
+    postlist = BlogPost.objects.all()
+    return render(
+        request,
+        'app/user.html',
+        {
+            'postlist':postlist
         }
     )
