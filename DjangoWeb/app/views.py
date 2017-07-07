@@ -4,19 +4,21 @@ Definition of views.
 #-*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpRequest
-from django.template import RequestContext
 from datetime import datetime
 from app.models import BlogPost
+from django.http import Http404
 
 def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
+    postlist = BlogPost.objects.all()
     return render(
         request,
         'app/index.html',
         {
             'title':'Home Page',
             'year':datetime.now().year,
+            'postlist':postlist
         }
     )
 
@@ -62,6 +64,10 @@ def user(request):
     """Renders the demo page."""
     assert isinstance(request, HttpRequest)
     postlist = BlogPost.objects.all()
+    #try:
+    #    postlist = BlogPost.objects.get(id=str(id))
+    #except:
+    #    raise Http404
     return render(
         request,
         'app/user.html',
@@ -69,3 +75,16 @@ def user(request):
             'postlist':postlist
         }
     )
+
+def detail(request,id):
+    try:
+        post = BlogPost.objects.get(id=str(id))
+    except:
+        raise Http404
+    return render(
+        request,
+        'app/post.html',
+        {
+            'post':post
+            }
+        )

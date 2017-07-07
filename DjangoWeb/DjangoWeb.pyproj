@@ -29,6 +29,12 @@
   <ItemGroup>
     <Compile Include="app\forms.py" />
     <Compile Include="app\models.py" />
+    <Compile Include="app\templatetags\custom_markdown.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="app\templatetags\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="app\tests.py" />
     <Compile Include="app\views.py" />
     <Compile Include="app\__init__.py" />
@@ -42,6 +48,7 @@
   <ItemGroup>
     <Folder Include="app\" />
     <Folder Include="app\migrations\" />
+    <Folder Include="app\templatetags\" />
     <Folder Include="app\static\" />
     <Folder Include="app\static\app\" />
     <Folder Include="app\static\app\content\" />
@@ -52,9 +59,11 @@
     <Folder Include="DjangoWeb\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\static\app\content\colorful.css" />
     <Content Include="app\templates\app\demo.html" />
     <Content Include="app\templates\app\index.html" />
     <Content Include="app\templates\app\user.html" />
+    <Content Include="app\templates\app\post.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />

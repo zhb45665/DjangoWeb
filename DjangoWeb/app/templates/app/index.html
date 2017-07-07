@@ -3,11 +3,28 @@
 {% block content %}
 
 <div class="jumbotron">
-    <h3>Django</h3>
-    <p class="lead">第一段测试</p>
+    <h2 class="media-body">天行健，君子以自强不息，地势坤，君子已厚的载物</h2>
+
     <!--
     <p><a href="https://www.djangoproject.com/" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
     -->
+</div>
+<div class="posts">
+    {% for post in postlist %}
+    <section class="post">
+        <header class="post-header">
+            <h2 class="post-title">
+                <a href="{% url 'detail' id=post.id %}">
+                    {{post.title}}
+                </a>
+            </h2>
+            <p class="post-meta">
+                Time:<a class="post-author" href="#">
+                {{post.timestamp}}</a>
+            </p>
+        </header>
+    </section>
+    {% endfor %}
 </div>
 <!--
 <div class="row">
