@@ -1,4 +1,5 @@
 ﻿{% extends "app/layout.html" %}
+{% load custom_markdown %}
 {% block content %}
 <div class="posts">
     {% for post in postlist %}
@@ -12,9 +13,9 @@
                 {{post.timestamp}}</a>
             </p>
         </header>
-        <div class="post-description">
+        <div>
             <p>
-                {{post.body}}
+                {{post.body|custom_markdown}}
             </p>
         </div>
     </section>
