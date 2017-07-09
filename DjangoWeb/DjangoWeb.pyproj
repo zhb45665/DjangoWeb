@@ -59,6 +59,7 @@
     <Folder Include="DjangoWeb\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\static\app\content\bootstrap.min.css" />
     <Content Include="app\static\app\content\colorful.css" />
     <Content Include="app\templates\app\demo.html" />
     <Content Include="app\templates\app\index.html" />
@@ -67,7 +68,7 @@
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />
-    <Content Include="app\static\app\content\bootstrap.min.css" />
+    <Content Include="app\static\app\content\bootstrap.min.css.bak" />
     <Content Include="app\static\app\content\site.css" />
     <Content Include="app\static\app\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="app\static\app\fonts\glyphicons-halflings-regular.svg" />
