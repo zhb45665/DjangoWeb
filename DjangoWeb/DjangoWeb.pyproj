@@ -62,7 +62,7 @@
     <Content Include="app\static\app\content\colorful.css" />
     <Content Include="app\templates\app\demo.html" />
     <Content Include="app\templates\app\index.html" />
-    <Content Include="app\templates\app\user.html" />
+    <Content Include="app\templates\app\content.html" />
     <Content Include="app\templates\app\post.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />

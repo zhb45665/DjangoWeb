@@ -16,7 +16,7 @@ def home(request):
         request,
         'app/index.html',
         {
-            'title':'Home Page',
+            'title':'首页',
             'year':datetime.now().year,
             'postlist':postlist
         }
@@ -60,7 +60,7 @@ def demo(request):
             'year':datetime.now().year,
         }
     )
-def user(request):
+def content(request):
     """Renders the demo page."""
     assert isinstance(request, HttpRequest)
     postlist = BlogPost.objects.all()
@@ -70,9 +70,10 @@ def user(request):
     #    raise Http404
     return render(
         request,
-        'app/user.html',
+        'app/content.html',
         {
-            'postlist':postlist
+            'title':'随记',
+            'postlist':postlist,
         }
     )
 
@@ -85,6 +86,7 @@ def detail(request,id):
         request,
         'app/post.html',
         {
-            'post':post
+            'title':'博文',
+            'post':post,
             }
         )

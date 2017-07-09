@@ -46,6 +46,6 @@ urlpatterns = [
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^demo', app.views.demo, name='demo'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^user', app.views.user, name='user'),
+    url(r'^content', app.views.content, name='content'),
     url(r'^(?P<id>\d+)/$', app.views.detail, name='detail'),
 ]
