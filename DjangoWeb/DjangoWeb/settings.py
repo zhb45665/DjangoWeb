@@ -41,8 +41,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-     'app',
+    'app',
+    'threadedcomments',
+    'django_comments',
+    'django.contrib.sites',
+
 ]
+
+COMMENTS_APP = 'threadedcomments'
+
+SITE_ID = 1
+
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
