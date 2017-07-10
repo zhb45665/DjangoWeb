@@ -7,6 +7,7 @@ from django.http import HttpRequest
 from datetime import datetime
 from app.models import BlogPost
 from django.http import Http404
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
 def home(request):
     """Renders the home page."""
@@ -15,7 +16,7 @@ def home(request):
     return render(
         request,
         'app/index.html',
-        {
+        {   
             'title':'首页',
             'year':datetime.now().year,
             'postlist':postlist
@@ -63,7 +64,15 @@ def demo(request):
 def content(request):
     """Renders the demo page."""
     assert isinstance(request, HttpRequest)
-    postlist = BlogPost.objects.all()
+    posts = BlogPost.objects.all()
+    paginator = Paginator(posts,2)
+    page = request.GET.get('page')
+    try:
+        postlist = paginator.page(page)
+    except PageNotAnInteger:
+        postlist = paginator.page(1)
+    except EmptyPage:
+        postlist = paginator.page(paginator.num_pages)
     #try:
     #    postlist = BlogPost.objects.get(id=str(id))
     #except:
