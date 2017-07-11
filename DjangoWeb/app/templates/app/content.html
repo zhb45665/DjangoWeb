@@ -1,12 +1,15 @@
 ﻿{% extends "app/layout.html" %}
 {% load custom_markdown %}
 {% block content %}
+
 <div class="posts">
     {% for post in postlist %}
     <section class="post">
         <header class="post-header">
             <h2 class="post-title">
-                {{post.title}}
+                <a href="{% url 'detail' id=post.id %}">
+                    {{post.title}}
+                </a>
             </h2>
             <p class="post-meta">
                 Time:<a class="post-author" href="#">
@@ -15,10 +18,26 @@
         </header>
         <div>
             <p>
-                {{post.body|custom_markdown|linebreaksbr}}
+                {{post.body|custom_markdown|linebreaksbr|truncatewords:10}}
             </p>
         </div>
     </section>
     {% endfor %}
+    {% if postlist.object_list and postlist.paginator.num_pages > 1 %}
+    <div>
+        <ul class="pager">
+            {% if postlist.has_previous %}
+            <li>
+                <a href="?page={{postlist.previous_page_number}}">上一页</a>
+            </li>
+            {% endif %}
+            {% if postlist.has_next %}
+            <li>
+                <a href="?page={{postlist.next_page_number}}">下一页</a>
+            </li> 
+            {% endif %}
+        </ul>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

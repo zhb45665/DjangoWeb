@@ -7,6 +7,8 @@ from django.http import HttpRequest
 from datetime import datetime
 from app.models import BlogPost
 from django.http import Http404
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+from django.contrib.syndication.views import Feed
 
 def home(request):
     """Renders the home page."""
@@ -15,7 +17,7 @@ def home(request):
     return render(
         request,
         'app/index.html',
-        {
+        {   
             'title':'首页',
             'year':datetime.now().year,
             'postlist':postlist
@@ -63,7 +65,15 @@ def demo(request):
 def content(request):
     """Renders the demo page."""
     assert isinstance(request, HttpRequest)
-    postlist = BlogPost.objects.all()
+    posts = BlogPost.objects.all()
+    paginator = Paginator(posts,2)
+    page = request.GET.get('page')
+    try:
+        postlist = paginator.page(page)
+    except PageNotAnInteger:
+        postlist = paginator.page(1)
+    except EmptyPage:
+        postlist = paginator.page(paginator.num_pages)
     #try:
     #    postlist = BlogPost.objects.get(id=str(id))
     #except:
@@ -90,3 +100,18 @@ def detail(request,id):
             'post':post,
             }
         )
+
+class RSSFeed(Feed):
+    title = "RSS Feed"
+    link = "feeds/posts"
+    description = "RSS Feed"
+    def items(self):
+        return BlogPost.objects.order_by('-timestamp')
+    def item_title(self,item):
+        return item.title
+    def item_pubdate(self,item):
+        return item.timestamp
+    def item_description(self,item):
+        return item.body
+    def item_link(self,item):
+        return item.get_absolute_url()

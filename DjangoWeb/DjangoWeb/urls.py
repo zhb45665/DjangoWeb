@@ -6,9 +6,10 @@ from datetime import datetime
 from django.conf.urls import url
 import django.contrib.auth.views
 
-
+import django_comments
 import app.forms
 import app.views
+from app.views import RSSFeed
 
 # Uncomment the next lines to enable the admin:
 from django.conf.urls import include
@@ -48,4 +49,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^content', app.views.content, name='content'),
     url(r'^(?P<id>\d+)/$', app.views.detail, name='detail'),
+    url(r'^mycomment',include('django_comments.urls')),
+    url(r'^feed/$',RSSFeed(),name="RSS"),
+
 ]

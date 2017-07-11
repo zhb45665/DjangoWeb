@@ -29,6 +29,12 @@
   <ItemGroup>
     <Compile Include="app\forms.py" />
     <Compile Include="app\models.py" />
+    <Compile Include="app\mycomments\form.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="app\mycomments\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="app\templatetags\custom_markdown.py">
       <SubType>Code</SubType>
     </Compile>
@@ -48,6 +54,13 @@
   <ItemGroup>
     <Folder Include="app\" />
     <Folder Include="app\migrations\" />
+    <Folder Include="app\mycomments\" />
+    <Folder Include="app\mycomments\static\" />
+    <Folder Include="app\mycomments\static\mycomments\" />
+    <Folder Include="app\mycomments\static\mycomments\css\" />
+    <Folder Include="app\mycomments\static\mycomments\js\" />
+    <Folder Include="app\mycomments\templates\" />
+    <Folder Include="app\mycomments\templates\comments\" />
     <Folder Include="app\templatetags\" />
     <Folder Include="app\static\" />
     <Folder Include="app\static\app\" />
@@ -59,6 +72,8 @@
     <Folder Include="DjangoWeb\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\mycomments\templates\comments\form.html" />
+    <Content Include="app\mycomments\templates\comments\list.html" />
     <Content Include="app\static\app\content\bootstrap.min.css" />
     <Content Include="app\static\app\content\colorful.css" />
     <Content Include="app\templates\app\demo.html" />

@@ -13,4 +13,6 @@ class BlogPost(models.Model):
         return self.title
     class Meta():
         ordering = ['-timestamp']
+    def get_absolute_url(self):
+        return self.body
 admin.site.register(BlogPost)

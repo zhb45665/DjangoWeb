@@ -1,6 +1,10 @@
-﻿{% extends "app/layout.html" %}
+﻿
+{% extends "app/layout.html" %}
 {% load custom_markdown %}
+{% load staticfiles %}
 {% block content %}
+{% load threadedcomments_tags %}
+
 <div class="posts">
     <section class="post">
         <header class="post-header">
@@ -15,6 +19,9 @@
         <div>
             <p>
                 {{post.body|custom_markdown|linebreaksbr}}
+                {% render_comment_list for post %}
+                {% render_comment_form for post %}
+              
             </p>
         </div>
     </section>
