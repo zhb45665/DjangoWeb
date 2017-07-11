@@ -8,6 +8,7 @@ from datetime import datetime
 from app.models import BlogPost
 from django.http import Http404
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+from django.contrib.syndication.views import Feed
 
 def home(request):
     """Renders the home page."""
@@ -99,3 +100,18 @@ def detail(request,id):
             'post':post,
             }
         )
+
+class RSSFeed(Feed):
+    title = "RSS Feed"
+    link = "feeds/posts"
+    description = "RSS Feed"
+    def items(self):
+        return BlogPost.objects.order_by('-timestamp')
+    def item_title(self,item):
+        return item.title
+    def item_pubdate(self,item):
+        return item.timestamp
+    def item_description(self,item):
+        return item.body
+    def item_link(self,item):
+        return item.get_absolute_url()
