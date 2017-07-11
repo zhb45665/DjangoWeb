@@ -66,7 +66,7 @@ def content(request):
     """Renders the demo page."""
     assert isinstance(request, HttpRequest)
     posts = BlogPost.objects.all()
-    paginator = Paginator(posts,2)
+    paginator = Paginator(posts,3)
     page = request.GET.get('page')
     try:
         postlist = paginator.page(page)
@@ -103,7 +103,7 @@ def detail(request,id):
 
 class RSSFeed(Feed):
     title = "RSS Feed"
-    link = "feeds/posts"
+    link = "http://zhb45665.cn/"
     description = "RSS Feed"
     def items(self):
         return BlogPost.objects.order_by('-timestamp')

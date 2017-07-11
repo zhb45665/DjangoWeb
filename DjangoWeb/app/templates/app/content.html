@@ -1,43 +1,91 @@
 ﻿{% extends "app/layout.html" %}
 {% load custom_markdown %}
 {% block content %}
+<div id="mainbody">
+<div class="blogs">
+<ul class="bloglist">
 
-<div class="posts">
     {% for post in postlist %}
-    <section class="post">
-        <header class="post-header">
-            <h2 class="post-title">
+    <li>
+        <div class="arrow_box">
+            <div class="ti"></div>
+          <!--三角形-->
+          <div class="ci"></div>
+          <!--圆形-->
+            <h2 class="title">
                 <a href="{% url 'detail' id=post.id %}">
                     {{post.title}}
                 </a>
             </h2>
-            <p class="post-meta">
-                Time:<a class="post-author" href="#">
-                {{post.timestamp}}</a>
+            <p class="textinfo">
+                {{post.body|custom_markdown|linebreaksbr|truncatewords:4}}
             </p>
-        </header>
-        <div>
-            <p>
-                {{post.body|custom_markdown|linebreaksbr|truncatewords:10}}
-            </p>
+          <ul class="details">
+            <li class="icon-time"><a href="#">{{post.timestamp}}</a></li>
+          </ul>
         </div>
-    </section>
-    {% endfor %}
-    {% if postlist.object_list and postlist.paginator.num_pages > 1 %}
-    <div>
-        <ul class="pager">
+         </li>
+   {% endfor %}
+    </ul>
+    <aside>
+      <div class="tuijian">
+        <h2>推荐文章</h2>
+        <ol>
+          <li><span><strong>1</strong></span><a href="/">有一种思念，是淡淡的幸福,一个心情一行文字</a></li>
+          <li><span><strong>2</strong></span><a href="/">励志人生-要做一个潇洒的女人</a></li>
+          <li><span><strong>3</strong></span><a href="/">女孩都有浪漫的小情怀——浪漫的求婚词</a></li>
+          <li><span><strong>4</strong></span><a href="/">Green绿色小清新的夏天-个人博客模板</a></li>
+          <li><span><strong>5</strong></span><a href="/">女生清新个人博客网站模板</a></li>
+          <li><span><strong>6</strong></span><a href="/">Wedding-婚礼主题、情人节网站模板</a></li>
+          <li><span><strong>7</strong></span><a href="/">Column 三栏布局 个人网站模板</a></li>
+          <li><span><strong>8</strong></span><a href="/">时间煮雨-个人网站模板</a></li>
+          <li><span><strong>9</strong></span><a href="/">花气袭人是酒香—个人网站模板</a></li>
+        </ol>
+      </div>
+      <div class="clicks">
+        <h2>热门点击</h2>
+        <ol>
+          <li><span><a href="/">慢生活</a></span><a href="/">有一种思念，是淡淡的幸福,一个心情一行文字</a></li>
+          <li><span><a href="/">爱情美文</a></span><a href="/">励志人生-要做一个潇洒的女人</a></li>
+          <li><span><a href="/">慢生活</a></span><a href="/">女孩都有浪漫的小情怀——浪漫的求婚词</a></li>
+          <li><span><a href="/">博客模板</a></span><a href="/">Green绿色小清新的夏天-个人博客模板</a></li>
+          <li><span><a href="/">女生个人博客</a></span><a href="/">女生清新个人博客网站模板</a></li>
+          <li><span><a href="/">Wedding</a></span><a href="/">Wedding-婚礼主题、情人节网站模板</a></li>
+          <li><span><a href="/">三栏布局</a></span><a href="/">Column 三栏布局 个人网站模板</a></li>
+          <li><span><a href="/">个人网站模板</a></span><a href="/">时间煮雨-个人网站模板</a></li>
+          <li><span><a href="/">古典风格</a></span><a href="/">花气袭人是酒香—个人网站模板</a></li>
+        </ol>
+      </div>
+      <div class="search">
+        <form class="searchform" method="get" action="#">
+          <input type="text" name="s" value="Search" onfocus="this.value=''" onblur="this.value='Search'">
+        </form>
+      </div>
+      </aside>
+</div>
+<bar>
+<nav-right id="nav-right">
+ {% if postlist.object_list and postlist.paginator.num_pages > 1 %}
+    <div >
+        <ul>
             {% if postlist.has_previous %}
+               <
             <li>
                 <a href="?page={{postlist.previous_page_number}}">上一页</a>
             </li>
+
             {% endif %}
             {% if postlist.has_next %}
-            <li>
+
+              <li>
                 <a href="?page={{postlist.next_page_number}}">下一页</a>
-            </li> 
+               </li>
+
             {% endif %}
-        </ul>
+            </ul>
     </div>
     {% endif %}
-</div>
-{% endblock %}
+</nav-right>
+    </bar>
+        </div>
+ {% endblock %}

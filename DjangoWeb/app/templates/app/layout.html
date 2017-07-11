@@ -1,58 +1,109 @@
-﻿<!DOCTYPE html>
+﻿<!doctype html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} | 云中龙</title>
-    {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'app/content/colorful.css' %}" />
-    <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
+{% load staticfiles %}
+
+<meta charset="utf-8">
+<title>云中龙</title>
+    
+<meta name="keywords" content="云中龙" />
+<meta name="description" content="云中龙" />
+<link type="text/css" href="{% static 'app/content/styles.css' %}" rel="stylesheet">
+<link type="text/css" href="{% static 'app/content/animation.css' %}" rel="stylesheet">
+<!-- 返回顶部调用 begin -->
+<link type="text/css" href="{% static 'app/content/lrtk.css' %}" rel="stylesheet" />
+<script type="text/javascript" src="{% static 'app/scripts/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'app/scripts/js.js' %}"></script>
+<!-- 返回顶部调用 end-->
+<!--[if lt IE 9]>
+<script src="js/modernizr.js"></script>
+<![endif]-->
 </head>
-
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="/" class="navbar-brand">首页</a>
+<header>
+    <div>
 
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                   <li><a href="{% url 'content' %}">随记</a></li>
-                    <!--
-                    <li><a href="{% url 'home' %}">Home</a></li>
-                    
-                    
-                    <li><a href="{% url 'about' %}">About</a></li>
-                    <li><a href="{% url 'contact' %}">Contact</a></li>
-                    <li><a href="{% url 'demo' %}">Demo</a></li>
-                        -->
-                </ul>
-                {% include 'app/loginpartial.html' %}
-            </div>
-        </div>
+  <nav id="nav">
+    <ul>
+      <li><a href="/" >网站首页</a></li>
+      <li><a href="{% url 'content' %}" target="_blank" title="随记">随记</a></li>
+        <!--
+      <li><a href="/book/" target="_blank" title="图书推荐">图书推荐</a></li>
+      <li><a href="/web/" target="_blank" title="网站建设">网站建设</a></li>
+      <li><a href="/newshtml5/" target="_blank" title="HTML5 / CSS3">HTML5 / CSS3</a></li>
+      <li><a href="/jstt/" target="_blank" title="技术探讨">技术探讨</a></li>
+      <li><a href="/news/s/" target="_blank" title="慢生活">慢生活</a></li>
+      <li><a href="/newstalk/" target="_blank" title="碎言碎语">碎言碎语</a></li>
+      <li><a href="/news/jsex/" target="_blank" title="JS 实例代码演示">JS实例</a></li>
+            -->
+    </ul>
+
+
+    <script src="{% static 'app/scripts/silder.js' %}"></script><!--获取当前页导航 高亮显示标题--> 
+</nav>
+<nav-right id="nav-right">
+{% if user.is_authenticated %}
+<form id="logoutForm" action="/logout" method="post" class="nav-right">
+    {% csrf_token %}
+    <ul class="nav-right ">
+        
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">注销</a></li>
+        <li><a >{{ user.username }} </a></li>
+    </ul>
+
+</form>
+
+{% else %}
+
+<ul>
+    <li><a href="{% url 'login' %}" target="_blank">登录</a></li>
+</ul>
+
+{% endif %}
+
+</nav-right>
+</div>
+</header>
+<!--header end-->
+<div id="mainbody">
+  <div class="info">
+    <figure> <img src="{% static 'app/images/art.jpg' %}"  alt="Panama Hat">
+      <figcaption><strong>渡人如渡己，渡已，亦是渡</strong> 当我们被误解时，会花很多时间去辩白。 但没有用，没人愿意听，大家习惯按自己的所闻、理解做出判别，每个人其实都很固执。与其努力且痛苦的试图扭转别人的评判，不如默默承受，给大家多一点时间和空间去了解。而我们省下辩解的功夫，去实现自身更久远的人生价值。其实，渡人如渡己，渡已，亦是渡人。</figcaption>
+    </figure>
+    <div class="card">
+      <h1>我的名片</h1>
+      <p>网名：zhb45665 | 云中龙</p>
+      <p>职业：一代神僧</p>
+      <ul class="linkmore">
+        <li><a href="/" class="talk" title="给我留言"></a></li>
+        <li><a href="/" class="address" title="联系地址"></a></li>
+        <li><a href="/" class="email" title="给我写信"></a></li>
+        <li><a href="/" class="photos" title="生活照片"></a></li>
+        <li><a href="/" class="heart" title="关注我"></a></li>
+      </ul>
     </div>
+  </div>
+  <!--info end-->
+  <div class="blank"></div>
+  <!--blogs end--> 
+</div>
 
-    <div class="container body-content">
+<!--mainbody end-->
 {% block content %}{% endblock %}
-        <hr/>
-        <footer>
-            <p>&copy; {{ year }} - zhangbiao</p>
-            <a class="navbar" href="{% url 'RSS'%}">RSS</a>
-        </footer>
-    </div>
-
+<footer>
+    <div class="visitors">
+  
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; {{ year }} - zhangbiao <a href="http://zhb45665.cn">DanceSmile</a></p>
+  </div>
+</footer>
     <script src="{% static 'app/scripts/jquery-1.10.2.js' %}"></script>
     <script src="{% static 'app/scripts/bootstrap.js' %}"></script>
     <script src="{% static 'app/scripts/respond.js' %}"></script>
 {% block scripts %}{% endblock %}
-
+<!-- jQuery仿腾讯回顶部和建议 代码开始 -->
+<div id="tbox"> <a id="togbook" href="/e/tool/gbook/?bid=1"></a> <a id="gotop" href="javascript:void(0)"></a> </div>
+<!-- 代码结束 -->
 </body>
 </html>
