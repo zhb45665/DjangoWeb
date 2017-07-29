@@ -19,10 +19,10 @@
                 Time:<a class="post-author" href="#">
                 {{post.timestamp}}</a>
             </p>
-
         <div>
             <p class="textinfo">
-                {{post.body|custom_markdown|linebreaksbr}}
+                {#{{ post.body|safe|custom_markdown|linebreaksbr}}#}
+                {{ post.body|custom_markdown |linebreaksbr }}
                 {% render_comment_list for post %}
                 {% render_comment_form for post %}
               

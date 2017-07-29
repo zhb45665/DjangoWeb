@@ -12,4 +12,4 @@ def custom_markdown(value):
     return mark_safe(markdown.markdown(value,
         extensions = ['markdown.extensions.fenced_code', 'markdown.extensions.codehilite'],
         safe_mode=True,
-        enable_attributes=False))
+        enable_attributes=True))
